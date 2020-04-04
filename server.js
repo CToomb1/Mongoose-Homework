@@ -4,8 +4,8 @@ const mongoose = require('mongoose');
 const app = express();
 const PORT = process.env.PORT || 3005;
 
-const viewRoutes = require('./routes/view');
-const apiRoutes = require('./routes/api');
+const viewRoutes = require('./route/views');
+const apiRoutes = require('./route/api');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
