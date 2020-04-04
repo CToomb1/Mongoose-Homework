@@ -1,24 +1,24 @@
-const express = require("express");
-const mongoose = require("mongoose");
-
-
-const PORT = process.env.PORT || 3000;
+const express = require('express');
+const mongoose = require('mongoose');
 
 const app = express();
+const PORT = process.env.PORT || 3005;
+
+const viewRoutes = require('./routes/view');
+const apiRoutes = require('./routes/api');
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static('public'));
 
-app.use(express.static("public"));
+app.use(apiRoutes)
+app.use(viewRoutes);
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/Workout", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false
 });
 
-// routes
-app.use(require("./routes/workout-routes"));
-
 app.listen(PORT, () => {
-  console.log(`App running on port ${PORT}!`);
+  console.log(`API server now on port ${PORT}!`);
 });
